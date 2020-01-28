@@ -25,9 +25,27 @@ jobs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
       ArtifactName: 'drop'
       publishLocation: 'Container'
-- deployment: Test
+- deployment: Dev
   dependsOn: Build
   environment: Dev
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+          - powershell: |
+              write-host "Hello, World from an ENV deployment"
+- deployment: Stage
+  dependsOn: Build
+  environment: Stage
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+          - powershell: |
+              write-host "Hello, World from an ENV deployment"
+- deployment: Prod
+  dependsOn: Build
+  environment: Prod
   strategy:
     runOnce:
       deploy:
