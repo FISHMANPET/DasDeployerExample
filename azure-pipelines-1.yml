@@ -28,9 +28,9 @@ stages:
         ArtifactName: 'drop'
         publishLocation: 'Container'
 - stage: Dev
+  dependsOn: Build
   jobs:
   - deployment: Dev
-    dependsOn: Build
     environment: Dev
     strategy:
       runOnce:
@@ -39,9 +39,9 @@ stages:
             - powershell: |
                 write-host "Hello, World from an ENV deployment"
 - stage: Staging
+  dependsOn: Build
   jobs:
   - deployment: Stage
-    dependsOn: Build
     environment: Stage
     strategy:
       runOnce:
@@ -50,9 +50,9 @@ stages:
             - powershell: |
                 write-host "Hello, World from an ENV deployment"
 - stage: Prod
+  dependsOn: Build
   jobs:
   - deployment: Prod
-    dependsOn: Build
     environment: Prod
     strategy:
       runOnce:
