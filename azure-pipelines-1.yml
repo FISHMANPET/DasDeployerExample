@@ -8,47 +8,55 @@ trigger:
 - master
 pool:
   vmImage: 'ubuntu-latest'
-jobs:
-- job: Build
+stages:
+- stage: Build
+  jobs:
+  - job: Build
 
-  steps:
-  - script: echo Hello, world!
-    displayName: 'Run a one-line script'
+    steps:
+    - script: echo Hello, world!
+      displayName: 'Run a one-line script'
 
-  - script: |
-      echo Add other tasks to build, test, and deploy your project.
-      echo See https://aka.ms/yaml
-    displayName: 'Run a multi-line script'
+    - script: |
+        echo Add other tasks to build, test, and deploy your project.
+        echo See https://aka.ms/yaml
+      displayName: 'Run a multi-line script'
 
-  - task: PublishBuildArtifacts@1
-    inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-      ArtifactName: 'drop'
-      publishLocation: 'Container'
-- deployment: Dev
-  dependsOn: Build
-  environment: Dev
-  strategy:
-    runOnce:
-      deploy:
-        steps:
-          - powershell: |
-              write-host "Hello, World from an ENV deployment"
-- deployment: Stage
-  dependsOn: Build
-  environment: Stage
-  strategy:
-    runOnce:
-      deploy:
-        steps:
-          - powershell: |
-              write-host "Hello, World from an ENV deployment"
-- deployment: Prod
-  dependsOn: Build
-  environment: Prod
-  strategy:
-    runOnce:
-      deploy:
-        steps:
-          - powershell: |
-              write-host "Hello, World from an ENV deployment"
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+- stage: Dev
+  jobs:
+  - deployment: Dev
+    dependsOn: Build
+    environment: Dev
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - powershell: |
+                write-host "Hello, World from an ENV deployment"
+- stage: Dev
+  jobs:
+  - deployment: Stage
+    dependsOn: Build
+    environment: Stage
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - powershell: |
+                write-host "Hello, World from an ENV deployment"
+- stage: Dev
+  jobs:
+  - deployment: Prod
+    dependsOn: Build
+    environment: Prod
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - powershell: |
+                write-host "Hello, World from an ENV deployment"
