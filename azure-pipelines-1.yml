@@ -38,7 +38,7 @@ stages:
           steps:
             - powershell: |
                 write-host "Hello, World from an ENV deployment"
-- stage: Dev
+- stage: Staging
   jobs:
   - deployment: Stage
     dependsOn: Build
@@ -49,7 +49,7 @@ stages:
           steps:
             - powershell: |
                 write-host "Hello, World from an ENV deployment"
-- stage: Dev
+- stage: Prod
   jobs:
   - deployment: Prod
     dependsOn: Build
