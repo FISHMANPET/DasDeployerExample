@@ -65,3 +65,5 @@ stages:
           steps:
             - powershell: |
                 write-host "Hello, World from an ENV deployment"
+            - powershell: |
+                throw "testing failure"
