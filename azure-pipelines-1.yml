@@ -27,10 +27,10 @@ stages:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
         ArtifactName: 'drop'
         publishLocation: 'Container'
-- stage: Dev
+- stage: Larry
   dependsOn: Build
   jobs:
-  - deployment: Dev
+  - deployment: Larry1
     environment: Dev
     strategy:
       runOnce:
@@ -38,10 +38,10 @@ stages:
           steps:
             - powershell: |
                 write-host "Hello, World from an ENV deployment"
-- stage: Staging
+- stage: Moe
   dependsOn: Build
   jobs:
-  - deployment: Stage
+  - deployment: Larry2
     environment: Stage
     strategy:
       runOnce:
@@ -49,10 +49,10 @@ stages:
           steps:
             - powershell: |
                 write-host "Hello, World from an ENV deployment"
-- stage: Prod
+- stage: Curly
   dependsOn: Build
   jobs:
-  - deployment: Prod
+  - deployment: Larry3
     environment: Prod
     strategy:
       runOnce:
