@@ -21,8 +21,8 @@ stages:
         echo Add other tasks to build, test, and deploy your project.
         echo See https://aka.ms/yaml
       displayName: 'Run a multi-line script'
-    - powershell: start-sleep -seconds 600
-      displayName: take a nap
+#    - powershell: start-sleep -seconds 600
+#      displayName: take a nap
 
     - task: PublishBuildArtifacts@1
       inputs:
@@ -51,6 +51,9 @@ stages:
           steps:
             - powershell: |
                 write-host "Hello, World from an ENV deployment"
+            - powershell: start-sleep -seconds 600
+              displayName: take a nap
+
 - stage: Curly
   dependsOn: Build
   jobs:
