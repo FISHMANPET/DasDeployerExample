@@ -38,10 +38,10 @@ stages:
           steps:
             - powershell: |
                 write-host "Hello, World from an ENV deployment"
-- stage: Moe
-  dependsOn: Build
-  jobs:
-  - deployment: Larry2
+#- stage: Moe
+#  dependsOn: Build
+#  jobs:
+  - deployment: Moe2
     environment: Stage
     strategy:
       runOnce:
@@ -49,10 +49,10 @@ stages:
           steps:
             - powershell: |
                 write-host "Hello, World from an ENV deployment"
-- stage: Curly
-  dependsOn: Build
-  jobs:
-  - deployment: Larry3
+#- stage: Curly
+#  dependsOn: Build
+#  jobs:
+  - deployment: Curly3
     environment: Prod
     strategy:
       runOnce:
